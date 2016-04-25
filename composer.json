@@ -1,0 +1,21 @@
+{
+    "name": "icambridge/safeguard",
+    "require": {
+        "nikic/php-parser": "^2.1"
+    },
+    "require-dev": {
+	"phpspec/phpspec": "*",
+	"behat/behat": "*"
+    },
+    "authors": [
+        {
+            "name": "Iain Cambridge",
+            "email": "iain@iain.sexy"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Safeguard": "src/"
+        }
+    }
+}
