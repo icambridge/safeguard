@@ -26,15 +26,15 @@ class ClassParser
      */
     public function processClasses(array $stmts)
     {
-        $output = [];
+        $classes = [];
         foreach ($stmts as $stmt) {
             if ($stmt instanceof Stmt\Class_)
             {
-                $output[] = $this->processClass($stmt);
+                $classes[] = $this->processClass($stmt);
             }
         }
 
-        return $output;
+        return $classes;
     }
 
     /**
