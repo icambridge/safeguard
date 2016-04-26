@@ -1,6 +1,6 @@
 <?php
 
-namespace Safeguard;
+namespace Safeguard\Parsers;
 
 use PhpParser\Node\Param as ParamNode;
 use PhpParser\Node\Stmt\Class_;
@@ -8,7 +8,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use Safeguard\Stmts\Method;
 use Safeguard\Stmts\Param;
 
-class ClassMethodResolver
+class ClassMethodParser
 {
     /**
      * @param Class_ $classNode

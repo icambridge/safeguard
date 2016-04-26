@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Safeguard;
+namespace spec\Safeguard\Parsers;
 
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
@@ -8,13 +8,14 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Safeguard\Parsers\ClassMethodParser;
 use Safeguard\Stmts\Method;
 
-class ClassMethodResolverSpec extends ObjectBehavior
+class ClassMethodParserSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Safeguard\ClassMethodResolver');
+        $this->shouldHaveType(ClassMethodParser::class);
     }
 
     function it_returns_method_objects_for_all_class_methods()
