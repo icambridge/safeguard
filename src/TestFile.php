@@ -1,8 +1,6 @@
 <?php
 
-namespace Iain {
+function test_hello_world()
+{
 
-    class TestFile {
-
-    }
 }
