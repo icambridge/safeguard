@@ -13,6 +13,7 @@ class AliasResolver
 
     public function __construct(array $nodes)
     {
+        // TODO move to factory
         $this->prepareData($nodes);
     }
 
