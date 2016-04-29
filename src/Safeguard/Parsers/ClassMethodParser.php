@@ -11,6 +11,18 @@ use Safeguard\Stmts\Param;
 class ClassMethodParser
 {
     /**
+     * @var ParamParser
+     */
+    private $paramParser;
+
+    /**
+     * @param ParamParser $paramParser
+     */
+    public function __construct(ParamParser $paramParser)
+    {
+        $this->paramParser = $paramParser;
+    }
+    /**
      * @param Class_ $classNode
      * @return Method[]
      */
@@ -34,19 +46,8 @@ class ClassMethodParser
     protected function convertMethod(ClassMethod $classMethod)
     {
         $name = $classMethod->name;
-        $params = [];
-        foreach ($classMethod->params as $param) {
-            $params[] = $this->convertParam($param);
-        }
+        $params = $this->paramParser->processParams($classMethod->params);
 
         return new Method($name, $params);
-    }
-
-    protected function convertParam(ParamNode $param)
-    {
-        $name = $param->name;
-        $typeHint = implode("\\",  $param->type->parts);
-
-        return new Param($name, $typeHint);
     }
 }
