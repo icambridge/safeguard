@@ -1,7 +1,8 @@
 {
     "name": "icambridge/safeguard",
     "require": {
-        "nikic/php-parser": "^2.1"
+        "nikic/php-parser": "^2.1",
+        "symfony/console": "~3.0"
     },
     "require-dev": {
 	"phpspec/phpspec": "*",

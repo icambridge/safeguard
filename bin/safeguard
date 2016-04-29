@@ -3,6 +3,7 @@
 
 include __DIR__ . "/../vendor/autoload.php";
 
+$application = new \Symfony\Component\Console\Application("Safeguard", "0.1");
 use PhpParser\ParserFactory;
 $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP5);
 
@@ -10,4 +11,4 @@ $code = file_get_contents(__DIR__ . "/../src/TestFile.php");
 
 $result = $parser->parse($code);
 
-var_dump($result);
+//var_dump($result);
