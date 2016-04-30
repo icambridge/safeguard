@@ -4,5 +4,5 @@
 include __DIR__ . "/../vendor/autoload.php";
 
 $application = new \Symfony\Component\Console\Application("Safeguard", "0.1");
+$application->addCommands([new \Safeguard\Command\ScanCommand()]);
 $application->run();
-var_dump($result);
