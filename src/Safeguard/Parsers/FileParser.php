@@ -2,7 +2,6 @@
 
 namespace Safeguard\Parsers;
 
-use Safeguard\AliasResolver;
 use Safeguard\Stmts\File;
 
 class FileParser
@@ -42,13 +41,13 @@ class FileParser
         $this->aliasParser = $aliasParser;
     }
 
-    public function processFile($nodes)
+    public function processFile($filename, $nodes)
     {
         $functions = $this->functionParser->processFunctions($nodes);
         $namespaces = $this->namespaceParser->processNamespaces($nodes);
         $classes = $this->classParser->processClasses($nodes);
         $aliasResolver = $this->aliasParser->createResolver($nodes);
 
-        return new File($aliasResolver, $classes, $namespaces, $functions);
+        return new File($filename, $aliasResolver, $classes, $namespaces, $functions);
     }
 }

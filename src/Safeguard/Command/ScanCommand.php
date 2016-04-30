@@ -44,7 +44,7 @@ class ScanCommand extends Command
         $files = $codeFinder->getFileNames($realpath);
         foreach ($files as $filename) {
             $nodes = $codeParser->parseCode($filename);
-            $file = $fileParser->processFile($nodes);
+            $file = $fileParser->processFile($filename, $nodes);
         }
 
         $message = sprintf("Finished %d files scanned", count($files));

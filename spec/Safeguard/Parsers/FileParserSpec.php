@@ -53,6 +53,6 @@ class FileParserSpec extends ObjectBehavior
         $classParser->processClasses($stmts)->willReturn([]);
         $aliasParser->createResolver($stmts)->willReturn(new AliasResolver([]));
 
-        $this->processFile($stmts)->shouldBeAnInstanceOf(File::class);
+        $this->processFile("file", $stmts)->shouldBeAnInstanceOf(File::class);
     }
 }

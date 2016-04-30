@@ -23,19 +23,30 @@ class File
      * @var AliasResolver
      */
     private $aliasResolver;
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
+     * @param string $name
      * @param AliasResolver $aliasResolver
      * @param ClassStmt[] $classes
      * @param NamespaceStmt[] $namespaces
      * @param FunctionStmt[] $functions
      */
-    public function __construct(AliasResolver $aliasResolver, $classes, $namespaces, $functions)
+    public function __construct($name, AliasResolver $aliasResolver, $classes, $namespaces, $functions)
     {
         $this->aliasResolver = $aliasResolver;
         $this->classes = $classes;
         $this->namespaces = $namespaces;
         $this->functions = $functions;
+        $this->name = $name;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function isClassAnAliasFor($alias, $className)
