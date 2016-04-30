@@ -5,7 +5,10 @@ namespace spec\Safeguard\Stmts;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Safeguard\Stmts\AliasResolver;
+use Safeguard\Stmts\ClassStmt;
 use Safeguard\Stmts\File;
+use Safeguard\Stmts\FunctionStmt;
+use Safeguard\Stmts\NamespaceStmt;
 
 class FileSpec extends ObjectBehavior
 {
@@ -48,5 +51,18 @@ class FileSpec extends ObjectBehavior
         $functions = [1,2];
         $this->beConstructedWith(self::FILENAME, $aliasResolver, [], [], $functions);
         $this->getNumberOfFunctions()->shouldBe(2);
+    }
+
+    function it_returns_param_types(AliasResolver $aliasResolver, ClassStmt $classStmt, NamespaceStmt $namespaceStmt, FunctionStmt $functionStmt)
+    {
+        $this->beConstructedWith(self::FILENAME, $aliasResolver, [$classStmt], [$namespaceStmt], [$functionStmt]);
+        $classStmt->getTypeHints()->willReturn(['Type']);
+        $functionStmt->getTypeHints()->willReturn(['TypeTwo']);
+        $namespaceStmt->getTypeHints()->willReturn(['TypeThree']);
+
+        $this->getTypeHints()->shouldHaveCount(3);
+        $this->getTypeHints()->shouldContain('Type');
+        $this->getTypeHints()->shouldContain('TypeTwo');
+        $this->getTypeHints()->shouldContain('TypeThree');
     }
 }

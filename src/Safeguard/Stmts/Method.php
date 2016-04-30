@@ -23,4 +23,14 @@ class Method
         $this->name = $name;
         $this->params = $params;
     }
+
+    public function getTypeHints()
+    {
+        $typeHints = [];
+        foreach ($this->params as $param) {
+            $typeHints[] = $param->getTypeHint();
+        }
+
+        return $typeHints;
+    }
 }

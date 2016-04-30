@@ -30,7 +30,7 @@ class ParamParser
     {
         $name = $param->name;
         $typeHint = null;
-        if (is_object($param->type) && !empty($param->type->parts)) {
+        if (!empty($param->type) && !empty($param->type->parts)) {
             $typeHint = implode("\\",  $param->type->parts);
         }
 

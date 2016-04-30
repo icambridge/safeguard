@@ -23,4 +23,9 @@ class Param
         $this->typeHint = $typeHint;
         $this->name = $name;
     }
+
+    public function getTypeHint()
+    {
+        return $this->typeHint;
+    }
 }

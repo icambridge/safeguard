@@ -68,4 +68,23 @@ class File
     {
         return count($this->functions);
     }
+
+    public function getTypeHints()
+    {
+        $typeHints = [];
+
+        foreach ($this->namespaces as $namespace) {
+            $typeHints = array_merge($typeHints, $namespace->getTypeHints());
+        }
+
+        foreach ($this->classes as $class) {
+            $typeHints = array_merge($typeHints, $class->getTypeHints());
+        }
+
+        foreach ($this->functions as $function) {
+            $typeHints = array_merge($typeHints, $function->getTypeHints());
+        }
+
+        return $typeHints;
+    }
 }

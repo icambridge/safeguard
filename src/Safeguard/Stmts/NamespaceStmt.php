@@ -23,4 +23,23 @@ class NamespaceStmt
         $this->name = $name;
         $this->classes = $classes;
     }
+
+    /**
+     * @return ClassStmt[]
+     */
+    public function getClasses()
+    {
+        return $this->classes;
+    }
+
+    public function getTypeHints()
+    {
+        $typeHints = [];
+
+        foreach ($this->classes as $class) {
+            $typeHints = array_merge($typeHints, $class->getTypeHints());
+        }
+
+        return $typeHints;
+    }
 }
