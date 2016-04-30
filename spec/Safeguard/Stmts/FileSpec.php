@@ -4,7 +4,7 @@ namespace spec\Safeguard\Stmts;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Safeguard\AliasResolver;
+use Safeguard\Stmts\AliasResolver;
 use Safeguard\Stmts\File;
 
 class FileSpec extends ObjectBehavior

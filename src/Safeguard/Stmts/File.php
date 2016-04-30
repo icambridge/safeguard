@@ -2,8 +2,6 @@
 
 namespace Safeguard\Stmts;
 
-use Safeguard\AliasResolver;
-
 class File
 {
     /**

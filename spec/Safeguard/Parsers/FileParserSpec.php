@@ -4,20 +4,27 @@ namespace spec\Safeguard\Parsers;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Safeguard\Parsers\AliasParser;
 use Safeguard\Parsers\ClassParser;
 use Safeguard\Parsers\FileParser;
 use Safeguard\Parsers\FunctionParser;
 use Safeguard\Parsers\NamespaceParser;
+use Safeguard\Stmts\AliasResolver;
 use Safeguard\Stmts\File;
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Function_;
+use Symfony\Component\DependencyInjection\Alias;
 
 class FileParserSpec extends ObjectBehavior
 {
-    function let(FunctionParser $functionParser, NamespaceParser $namespaceParser, ClassParser $classParser)
-    {
-        $this->beConstructedWith($functionParser, $namespaceParser, $classParser);
+    function let(
+        FunctionParser $functionParser,
+        NamespaceParser $namespaceParser,
+        ClassParser $classParser,
+        AliasParser $aliasParser
+    ) {
+        $this->beConstructedWith($functionParser, $namespaceParser, $classParser, $aliasParser);
     }
 
     function it_is_initializable()
@@ -28,7 +35,8 @@ class FileParserSpec extends ObjectBehavior
     function it_returns_method_objects_for_all_class_methods(
         FunctionParser $functionParser,
         NamespaceParser $namespaceParser,
-        ClassParser $classParser
+        ClassParser $classParser,
+        AliasParser $aliasParser
     ) {
         $functionName = 'isReal';
         $functionStmt = new Function_($functionName);
@@ -43,6 +51,7 @@ class FileParserSpec extends ObjectBehavior
         $functionParser->processFunctions($stmts)->willReturn([]);
         $namespaceParser->processNamespaces($stmts)->willReturn([]);
         $classParser->processClasses($stmts)->willReturn([]);
+        $aliasParser->createResolver($stmts)->willReturn(new AliasResolver([]));
 
         $this->processFile($stmts)->shouldBeAnInstanceOf(File::class);
     }

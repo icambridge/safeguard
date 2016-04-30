@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Safeguard;
+namespace spec\Safeguard\Stmts;
 
 use PhpParser\Node\Name;
-use PhpParser\Node\Stmt\UseUse;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Safeguard\Stmts\AliasResolver;
 
 class AliasResolverSpec extends ObjectBehavior
 {
@@ -16,16 +16,14 @@ class AliasResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Safeguard\AliasResolver');
+        $this->shouldHaveType(AliasResolver::class);
     }
 
     function it_knows_if_string_is_alias_for_something()
     {
         $nameStr = 'Symfony\Component\DependencyInjection\ContainerInterface';
         $alias = 'ContainerInterface';
-        $name = new Name($nameStr);
-        $useUse = new UseUse($name, $alias);
-        $this->beConstructedWith([$useUse]);
+        $this->beConstructedWith([$alias => $nameStr]);
         $this->isAliasFor($alias, $nameStr)->shouldBe(true);
     }
 
@@ -33,9 +31,7 @@ class AliasResolverSpec extends ObjectBehavior
     {
         $nameStr = 'Symfony\Component\DependencyInjection\ContainerInterface';
         $alias = 'ContainerInterface';
-        $name = new Name($nameStr);
-        $useUse = new UseUse($name, $alias);
-        $this->beConstructedWith([$useUse]);
+        $this->beConstructedWith([$alias => $nameStr]);
         $this->isAliasFor("FakeClass", $nameStr)->shouldBe(false);
     }
 }
