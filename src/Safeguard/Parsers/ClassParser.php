@@ -45,7 +45,31 @@ class ClassParser
     {
         $methods = $this->classMethodParser->processMethods($class_);
         $name = $class_->name;
+        $extendsClassName = $this->extractExtends($class_);
+        $implements = $this->extractImplements($class_);
 
-        return new ClassStmt($name, $methods);
+        return new ClassStmt($name, $methods, $extendsClassName, $implements);
+    }
+
+    protected function extractExtends(Stmt\Class_ $class_)
+    {
+        if (empty($class_->extends) || empty($class_->extends->parts)) {
+            return null;
+        }
+
+        return implode('\\', $class_->extends->parts);
+    }
+
+    protected function extractImplements(Stmt\Class_ $class_)
+    {
+        $implements = [];
+        foreach ($class_->implements as $implement) {
+            if (empty($implement) || empty($implement->parts)) {
+                continue;
+            }
+            $implements[] =  implode('\\', $implement->parts);
+        }
+
+        return $implements;
     }
 }

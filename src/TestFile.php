@@ -1,6 +1,6 @@
 <?php
 
-function test_hello_world()
+class Hello implements One, Two
 {
-
+    use Tello;
 }

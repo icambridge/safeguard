@@ -15,7 +15,7 @@ class ClassStmtSpec extends ObjectBehavior
 
     function let()
     {
-        $this->beConstructedWith(self::CLASS_NAME, []);
+        $this->beConstructedWith(self::CLASS_NAME, [], "", []);
     }
 
     function it_is_initializable()
@@ -26,7 +26,7 @@ class ClassStmtSpec extends ObjectBehavior
     function it_returns_param_types_for_all_methods(Method $classMethod)
     {
         $classMethod->getTypeHints()->willReturn([self::TYPE]);
-        $this->beConstructedWith(self::CLASS_NAME, [$classMethod]);
+        $this->beConstructedWith(self::CLASS_NAME, [$classMethod], "", []);
         $this->getTypeHints()->shouldBe([self::TYPE]);
     }
 }
