@@ -47,7 +47,7 @@ class ClassStmt
         return $paramTypes;
     }
 
-    public function getExtendsClassName()
+    public function getParentClass()
     {
         return $this->extends;
     }
@@ -55,5 +55,10 @@ class ClassStmt
     public function getImplements()
     {
         return $this->implements;
+    }
+
+    public function isChildClass()
+    {
+        return !empty($this->extends);
     }
 }

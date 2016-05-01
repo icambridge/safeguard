@@ -64,7 +64,7 @@ class ClassParserSpec extends ObjectBehavior
         $stmts = [$class];
         $classMethodParser->processMethods($class)->willReturn([]);
 
-        $this->processClasses($stmts)[0]->getExtendsClassName()->shouldBe(self::HELLO_WORLD);
+        $this->processClasses($stmts)[0]->getParentClass()->shouldBe(self::HELLO_WORLD);
     }
 
     function it_populates_implement(ClassMethodParser $classMethodParser)

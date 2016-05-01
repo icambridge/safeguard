@@ -53,8 +53,12 @@ class FileSpec extends ObjectBehavior
         $this->getNumberOfFunctions()->shouldBe(2);
     }
 
-    function it_returns_param_types(AliasResolver $aliasResolver, ClassStmt $classStmt, NamespaceStmt $namespaceStmt, FunctionStmt $functionStmt)
-    {
+    function it_returns_param_types(
+        AliasResolver $aliasResolver,
+        ClassStmt $classStmt,
+        NamespaceStmt $namespaceStmt,
+        FunctionStmt $functionStmt
+    ) {
         $this->beConstructedWith(self::FILENAME, $aliasResolver, [$classStmt], [$namespaceStmt], [$functionStmt]);
         $classStmt->getTypeHints()->willReturn(['Type']);
         $functionStmt->getTypeHints()->willReturn(['TypeTwo']);
@@ -64,5 +68,18 @@ class FileSpec extends ObjectBehavior
         $this->getTypeHints()->shouldContain('Type');
         $this->getTypeHints()->shouldContain('TypeTwo');
         $this->getTypeHints()->shouldContain('TypeThree');
+    }
+
+    function it_returns_classes(
+        AliasResolver $aliasResolver,
+        ClassStmt $classStmt,
+        ClassStmt $classStmtTwo,
+        NamespaceStmt $namespaceStmt
+    ) {
+        $namespaceStmt->getClasses()->willReturn([$classStmtTwo]);
+        $this->beConstructedWith(self::FILENAME, $aliasResolver, [$classStmt], [$namespaceStmt], []);
+        $this->getClasses()->shouldHaveCount(2);
+        $this->getClasses()->shouldContain($classStmt);
+        $this->getClasses()->shouldContain($classStmtTwo);
     }
 }

@@ -29,4 +29,16 @@ class ClassStmtSpec extends ObjectBehavior
         $this->beConstructedWith(self::CLASS_NAME, [$classMethod], "", []);
         $this->getTypeHints()->shouldBe([self::TYPE]);
     }
+
+    function it_returns_true_if_extending_a_class()
+    {
+        $this->beConstructedWith(self::CLASS_NAME, [], "ParentClass", []);
+        $this->isChildClass()->shouldBe(true);
+    }
+
+    function it_returns_false_if_not_extending_a_class()
+    {
+        $this->beConstructedWith(self::CLASS_NAME, [], "", []);
+        $this->isChildClass()->shouldBe(false);
+    }
 }

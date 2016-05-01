@@ -87,4 +87,14 @@ class File
 
         return $typeHints;
     }
+
+    public function getClasses()
+    {
+        $classes = $this->classes;
+        foreach ($this->namespaces as $namespace) {
+            $classes = array_merge($classes, $namespace->getClasses());
+        }
+
+        return $classes;
+    }
 }

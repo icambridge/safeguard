@@ -13,6 +13,7 @@ use Safeguard\Parsers\NamespaceParser;
 use Safeguard\Parsers\ParamParser;
 use Safeguard\Runner\Checks\CheckRunner;
 use Safeguard\Runner\Checks\ContainerCheck;
+use Safeguard\Runner\Checks\EntityRepositoryCheck;
 use Safeguard\Runner\ResultsCollector;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -44,7 +45,8 @@ class ScanCommand extends Command
         $fileParser = new FileParser($functionParser, $namespaceParser, $classParser, $aliasParser);
         $resultCollector = new ResultsCollector();
         $containerCheck = new ContainerCheck();
-        $checkRunner = new CheckRunner([$containerCheck], $resultCollector);
+        $entityRepositoryCheck = new EntityRepositoryCheck();
+        $checkRunner = new CheckRunner([$containerCheck, $entityRepositoryCheck], $resultCollector);
 
         $realpath = realpath($name);
         $files = $codeFinder->getFileNames($realpath);
